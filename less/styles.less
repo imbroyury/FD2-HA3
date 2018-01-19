@@ -1,0 +1,133 @@
+@firstColorLeft: #141414;
+@secondColorLeft: #f8f8f8;
+@firstColorRight: #f8f8f8;
+@secondColorRight: #141414;
+@thirdColor: #e03536;
+
+body, html {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  input, button {
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
+  }
+}
+
+body {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+
+  #add-zone {
+    background-color: @firstColorLeft;
+    padding: 20px;
+    color: @secondColorLeft;
+    #add-zone-controls {
+      #add-tag-input-field {
+        height: 30px;
+        border: 1px solid @secondColorLeft;
+        padding: 3px;
+      }
+      #add-tag-btn {
+        height: 30px;
+        background-color: @firstColorLeft;
+        color: @secondColorLeft;
+        border: 1px solid @secondColorLeft;
+      }
+      .error-message {
+        position: absolute;
+        font-size: 0.8em;
+        font-weight: bold;
+        color: @thirdColor;
+        opacity: 0;
+        transition: .2s opacity;
+        &.visible {
+          opacity: 1;
+        }
+        &::before {
+          display: inline-block;
+          content: '\26A0';
+          font-size: 1.5em;
+          margin-right: 5px;
+        }
+      }
+    }
+    #added-tags {
+      margin-top: 30px;
+      .tag {
+        border: 1px solid @secondColorLeft;
+        background-color: @firstColorLeft;
+      }
+    }
+  }
+
+  #choose-zone {
+    background-color: @firstColorRight;
+    padding: 20px;
+    color: @secondColorRight;
+    #choose-tag-input-field {
+      height: 30px;
+      border: 1px solid @firstColorRight;
+      background-color: @secondColorRight;
+      color: @firstColorRight;
+      padding: 3px;
+      width: 200px;
+    }
+    #autocomplete-wrap {
+      width: 200px;
+      position: absolute;
+      .autocomplete-tag {
+        font-size: 0.9em;
+        color: @firstColorRight;
+        background-color: @secondColorRight;
+        border-bottom: 1px solid @firstColorRight;
+        padding: 3px;
+        overflow: auto;
+        transition: .1s all;
+        &:hover {
+          color: @secondColorRight;
+          background-color: @firstColorRight;
+          border: 1px solid @secondColorRight;
+          border-top: none;
+        }
+      }
+    }
+    #chosen-tags {
+      margin-top: 30px;
+      .chosen-tag {
+        background-color: @firstColorRight;
+        border: 1px solid @secondColorRight;
+      }
+    }
+  }
+
+  /* styles for tags from both left and right side are similar except colors */
+  .tag, .chosen-tag {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    transition: .2s all;
+    &:hover {
+      transform: scale(1.1);
+    }
+    .tag-text, .chosen-tag-text {
+      padding: 5px;
+    }
+    .remove-tag-btn, .remove-chosen-tag-btn {
+      color: @thirdColor;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    grid-template-rows: repeat(2, minmax(50vh, auto));
+    grid-template-columns: 1fr;
+  }
+}
